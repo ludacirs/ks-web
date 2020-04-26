@@ -2,9 +2,11 @@ package com.you.app;
 
 import com.you.app.entity.Interests;
 import com.you.app.entity.Person;
+import com.you.app.entity.Skill;
 import com.you.app.entity.SocialMedia;
 import com.you.app.repository.InterestsRepository;
 import com.you.app.repository.PersonRepository;
+import com.you.app.repository.SkillRepository;
 import com.you.app.repository.SocialMediaRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -15,12 +17,15 @@ public class AppApplication implements CommandLineRunner {
 	private final PersonRepository personRepository;
 	private final SocialMediaRepository socialMediaRepository;
 	private final InterestsRepository interestsRepository;
+	private final SkillRepository skillRepository;
 
-	public AppApplication(PersonRepository personRepository, SocialMediaRepository socialMediaRepository, InterestsRepository interestsRepository) {//요부분 이해 안됨
+
+	public AppApplication(PersonRepository personRepository, SocialMediaRepository socialMediaRepository, InterestsRepository interestsRepository, SkillRepository skillRepository) {//요부분 이해 안됨
 		this.personRepository = personRepository;
 		this.socialMediaRepository = socialMediaRepository;
         this.interestsRepository = interestsRepository;
-    }
+		this.skillRepository = skillRepository;
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(AppApplication.class, args);
@@ -35,6 +40,7 @@ public class AppApplication implements CommandLineRunner {
 		interestsRepository.save(new Interests("game"));
 		interestsRepository.save(new Interests("sleep"));
 
-
+		skillRepository.save(new Skill("Java",100));
+		skillRepository.save(new Skill("JavaScript",100));
 	}
 }
