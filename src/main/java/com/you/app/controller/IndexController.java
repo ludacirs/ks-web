@@ -3,10 +3,8 @@ package com.you.app.controller;
 import com.you.app.entity.Interests;
 import com.you.app.entity.Person;
 import com.you.app.entity.Skill;
-import com.you.app.repository.InterestsRepository;
-import com.you.app.repository.PersonRepository;
-import com.you.app.repository.SkillRepository;
-import com.you.app.repository.SocialMediaRepository;
+import com.you.app.entity.Work;
+import com.you.app.repository.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,12 +17,14 @@ public class IndexController {
     private final PersonRepository personRepository;
     private final InterestsRepository interestsRepository;
     private final SkillRepository skillRepository;
+    private final WorkRepository workRepository;
 
-    public IndexController(SocialMediaRepository socialMediaRepository, PersonRepository personRepository, InterestsRepository interestsRepository, SkillRepository skillRepository) {
+    public IndexController(SocialMediaRepository socialMediaRepository, PersonRepository personRepository, InterestsRepository interestsRepository, SkillRepository skillRepository, WorkRepository workRepository) {
         this.socialMediaRepository = socialMediaRepository;
         this.personRepository = personRepository;
         this.interestsRepository = interestsRepository;
         this.skillRepository = skillRepository;
+        this.workRepository = workRepository;
     }
 
     @GetMapping("/")
@@ -39,6 +39,9 @@ public class IndexController {
 
         List<Skill> skills = skillRepository.findAll();
         model.addAttribute("skills", skills);
+
+        List<Work> works = workRepository.findAll();
+        model.addAttribute( "works", works);
 
         return "resume";
     }
